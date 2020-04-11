@@ -1,0 +1,16 @@
+# Predict, Resolve & Tally
+A minimal bash utility to work with predictions.
+
+## Example of use
+```bash
+$ predict
+> Statement: Before 1 July 2020 will SpaceX launch its first crewed mission into orbit?
+> Probability (%): 50
+> Date of resolution (year/month/day): 2020/07/01
+```
+
+```bash
+$ resolve
+Before 10 April 2020 will former Catalan President Carles Puigdemont return to Spain? (2020/04/10)
+> (TRUE/FALSE) TRUE
+```
