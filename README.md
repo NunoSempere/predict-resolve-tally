@@ -53,7 +53,7 @@ For example:
 [ -f /home/nuno/Documents/PRT ] && . /home/nuno/Documents/PRT
 ```
 
-Google "where is my .bashrc file stackoverflow" if you don't know where your file 
+Google "where is my .bashrc file stackoverflow" if you don't know where your bash file is.
 
 ### 2. Change the directory.
 
