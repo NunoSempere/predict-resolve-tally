@@ -1,5 +1,5 @@
 # Predict, Resolve & Tally
-A minimal bash utility to make predictions, resolve, and tally them. PRT only has 57 lines of code and plays rough with the user.
+57 lines of code which allow you to make predictions, resolve, and tally them. It plays rough with the user.
 
 ## Example of use
 
