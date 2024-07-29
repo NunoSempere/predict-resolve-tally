@@ -1,3 +1,5 @@
+#!/bin/bash
+
 pendingPredictions=/home/pendingPredictions.txt
 pendingPredictionsTemp="${pendingPredictions}.t"
 resolvedPredictions=/home/resolvedPredictions.txt
