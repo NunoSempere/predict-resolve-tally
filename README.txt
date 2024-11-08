@@ -50,9 +50,9 @@ Change the first 3 lines so that the program uses the directory of your choice.
 For example, in my system they might be:
 
 ```
-pendingPredictions=/home/nuno/Documents/Forecasting/pendingPredictions.txt
+pendingPredictions=~/Documents/Forecasting/pendingPredictions.txt
 pendingPredictionsTemp="${pendingPredictions}.t"
-resolvedPredictions=/home/nuno/Documents/Forecasting/resolvedPredictions.txt
+resolvedPredictions=~/Documents/Forecasting/resolvedPredictions.txt
 ```
 
 ## Gotchas

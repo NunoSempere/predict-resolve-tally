@@ -1,14 +1,14 @@
 #!/bin/bash
 
-pendingPredictions=/home/nuno/Documents/core/forecasting/past/PredictResolveTally/pendingPredictions.txt
+pendingPredictions="~/Documents/core/forecasting/past/PredictResolveTally/pendingPredictions.txt"
 pendingPredictionsTemp="${pendingPredictions}.t"
-resolvedPredictions=/home/nuno/Documents/core/forecasting/past/PredictResolveTally/resolvedPredictions.txt
+resolvedPredictions="~/Documents/core/forecasting/past/PredictResolveTally/resolvedPredictions.txt"
 
 function predict(){
         read -p "> Statement: " statement
         read -p "> Probability (%): " probability
         read -p "> Date of resolution (year/month/day): " date
-        echo UNRESOLVED	$date	$probability	$statement >> $pendingPredictions
+        echo -e "UNRESOLVED\t$date\t$probability\t$statement" >> $pendingPredictions
 }
 
 function resolve(){
@@ -22,13 +22,13 @@ function resolve(){
                 today=$(date +"%Y/%m/%d") 
                 if [[ "$today" > "$date" ]]; 
                 then
-                        # Already passed
+                        # Already resolved
                         echo $statement "("$date")"
                         read -p "> (TRUE/FALSE) " resolutionState
                         echo -e "$resolutionState\t$date\t$probability\t$statement" >> $resolvedPredictions
                 else
-                        # Not yet passed 
-                        echo $line >> $pendingPredictionsTemp   
+                        # Not yet resolved
+                        echo -e "$resolutionState\t$date\t$probability\t$statement" >> $resolvedPredictions >> $pendingPredictionsTemp
                 fi
         done 9< "$pendingPredictions"
         mv $pendingPredictionsTemp $pendingPredictions
