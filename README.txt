@@ -58,9 +58,11 @@ resolvedPredictions=/home/nuno/Documents/Forecasting/resolvedPredictions.txt
 ## Gotchas
 
 CSV
-- Statements, predictions and probabilities are saved, internally, as a csv
+- Statements, predictions and probabilities are saved, internally, as a tsv
   file.
-- This requires not using commas in your statements
+- This requires not using tabs in your statements
+- A previous version required not using commas instead, but this has now
+  changed
 
 Dates: 
 - Dates are in the year/month/day format, so that they can be compared 

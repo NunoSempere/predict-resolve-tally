@@ -1,24 +1,23 @@
 #!/bin/bash
 
-pendingPredictions=/home/pendingPredictions.txt
+pendingPredictions=/home/nuno/Documents/core/forecasting/past/PredictResolveTally/pendingPredictions.txt
 pendingPredictionsTemp="${pendingPredictions}.t"
-resolvedPredictions=/home/resolvedPredictions.txt
+resolvedPredictions=/home/nuno/Documents/core/forecasting/past/PredictResolveTally/resolvedPredictions.txt
 
 function predict(){
         read -p "> Statement: " statement
         read -p "> Probability (%): " probability
         read -p "> Date of resolution (year/month/day): " date
-        echo UNRESOLVED,$date,$probability,$statement >> $pendingPredictions
+        echo UNRESOLVED	$date	$probability	$statement >> $pendingPredictions
 }
 
 function resolve(){
-        > $pendingPredictions
         while IFS= read -r -u9 line || [[ -n "$line" ]]; do
 
-                resolutionState="$(cut -d',' -f1 <<<"$line")"
-                date="$(cut -d',' -f2 <<<"$line")"
-                probability="$(cut -d',' -f3 <<<"$line")"
-                statement="$(cut -d',' -f4 <<<"$line")"
+                resolutionState="$(cut -d'	' -f1 <<<"$line")"
+                date="$(cut -d'	' -f2 <<<"$line")"
+                probability="$(cut -d'	' -f3 <<<"$line")"
+                statement="$(cut -d'	' -f4 <<<"$line")"
                 
                 today=$(date +"%Y/%m/%d") 
                 if [[ "$today" > "$date" ]]; 
@@ -26,7 +25,7 @@ function resolve(){
                         # Already passed
                         echo $statement "("$date")"
                         read -p "> (TRUE/FALSE) " resolutionState
-                        echo $resolutionState,$date,$probability,$statement >> $resolvedPredictions
+                        echo -e "$resolutionState\t$date\t$probability\t$statement" >> $resolvedPredictions
                 else
                         # Not yet passed 
                         echo $line >> $pendingPredictionsTemp   
@@ -42,10 +41,10 @@ function tally(){
         for i in {0..100}
         do
 
-                regExPatternTRUE="TRUE.*,${i},"
-                regExPatternFALSE="FALSE.*,${i},"
-                numTRUE="$(grep -c -e $regExPatternTRUE $resolvedPredictions)"
-                numFALSE="$(grep -c -e $regExPatternFALSE $resolvedPredictions)"
+                regExPatternTRUE="^TRUE.*	${i}	"
+                regExPatternFALSE="^FALSE.*	${i}	"
+                numTRUE="$(grep -c -e "$regExPatternTRUE" $resolvedPredictions)"
+                numFALSE="$(grep -c -e "$regExPatternFALSE" $resolvedPredictions)"
 
                 numTRUEtens=$((numTRUEtens+numTRUE))
                 numFALSEtens=$((numFALSEtens+numFALSE))
